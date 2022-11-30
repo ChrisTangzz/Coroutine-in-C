@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "coroutine_int.h": "c"
+    }
+}

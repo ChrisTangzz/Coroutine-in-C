@@ -22,8 +22,24 @@ struct task_struct {
         struct rb_node node;
         long sum_exec_runtime;
         long exec_start;
+        long PRIO;
     };
 };
+
+// struct PRIO_task_struct {
+//     /* job information */
+//     struct cr *cr;
+//     int tfd; /* task fd */
+//     job_t job;
+//     void *args;
+//     struct context context; /* defined at context.h */
+
+//     /* default info */
+//     struct {
+//         struct rb_node node;
+//     };
+// };
+
 
 #ifndef container_of
 #define container_of(ptr, type, member)                        \

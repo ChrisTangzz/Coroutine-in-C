@@ -13,10 +13,8 @@ COROUTINE_DEFINE(job)
     
     cr_set(arr, 2, 4 /* index */);
     printf("[@ job %d] %d %d\n", *(int *)args, cr_dref(i), cr_dref(j));
-
+    
     cr_yield();
-
-    cr_set(i, cr_dref(i) + 1);
     if (cr_dref(arr, 4 /* index */) == 2)
         printf("array success\n");
     printf("[# job %d] %d %d\n", *(int *)args, cr_dref(i), cr_dref(j));
@@ -30,7 +28,7 @@ int main(void)
 {
     int crfd, tfd[10];
 
-    crfd = coroutine_create(CR_DEFAULT);
+    crfd = coroutine_create(CR_PRIO);
     if (crfd < 0)
         return crfd;
 
@@ -38,6 +36,7 @@ int main(void)
         tfd[i] = i;
         printf("[tfd %d] %d added, %d\n", coroutine_add(crfd, job, &tfd[i]), i,
                tfd[i]);
+        printf("----------------------------------------------------------\n");
     }
 
     coroutine_start(crfd);
